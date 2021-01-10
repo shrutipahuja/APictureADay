@@ -6,30 +6,31 @@ import androidx.lifecycle.ViewModel
 import com.example.apod.model.Image
 import com.example.apod.utility.DataUtils
 
+/**
+ * Viewmodel class associated with grid activity
+ */
 class GridViewModel : ViewModel() {
 
-    private lateinit var imageData: String
+    lateinit var imageData: String
     var imageList : List<Image>? = emptyList()
 
     private val _images = MutableLiveData<List<Image>>()
     val image: LiveData<List<Image>>
         get() = _images
 
-    private val _navigateToSelectedImage = MutableLiveData<Image>()
-    val navigateToSelectedImage: LiveData<Image>
-        get() = _navigateToSelectedImage
-
+    /**
+     * Called on instance of viewmodel
+     */
     init {
         getNASAImages()
     }
 
-    private fun getNASAImages() {
+    /**
+     * Loads the list of images from json object
+     */
+    fun getNASAImages() {
         imageData = DataUtils.readJson("data.json")
         imageList = DataUtils.fromJson(imageData)
         _images.value = imageList?.reversed()
-    }
-
-    fun displayImageDetails(image: Image) {
-        _navigateToSelectedImage.value = image
     }
 }

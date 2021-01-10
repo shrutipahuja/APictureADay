@@ -3,6 +3,9 @@ package com.example.apod.model
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
+/**
+ * Model class for each image and its attributes
+ */
 @Parcelize
 data class Image(
     val copyright: String?,

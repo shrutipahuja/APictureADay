@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
-        android:padding="2dp"
+        android:padding="@dimen/spacing_2"
         android:scaleType="centerCrop"
         tools:src="@tools:sample/backgrounds/scenic"/>
 
