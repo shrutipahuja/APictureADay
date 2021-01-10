@@ -6,7 +6,7 @@ Each image has a title, date, image url, etc.
 
 APOD has two screens:
 
-<b>Screen 1: APOD Grid Screen</b>
+<b>Screen 1: Image Grid Screen</b>
 
 <img src = "https://user-images.githubusercontent.com/60269503/104133235-490afc80-53a8-11eb-9161-5c978294c9a8.png" width = "200" height = "400"/>
 This screen displays the images created in a reverse chronological order in a grid like scrollable list.
