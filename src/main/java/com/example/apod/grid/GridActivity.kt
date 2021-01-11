@@ -2,11 +2,14 @@ package com.example.apod.grid
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.apod.R
 import com.example.apod.databinding.ActivityGridBinding
 import com.example.apod.detail.DetailFragment
 import com.example.apod.model.Image
+import com.example.apod.utility.NetworkUtils
 
 /*
 Launcher activity to display the grid of images
@@ -14,7 +17,8 @@ Launcher activity to display the grid of images
 class GridActivity : AppCompatActivity(), GridAdapter.ImageClickListener {
 
     private lateinit var binding: ActivityGridBinding
-        private val viewModel: GridViewModel by lazy {
+
+    private val viewModel: GridViewModel by lazy {
         ViewModelProvider(this).get(GridViewModel::class.java)
     }
 
@@ -30,10 +34,14 @@ class GridActivity : AppCompatActivity(), GridAdapter.ImageClickListener {
      */
     private fun initView() {
         viewModel.image.observe(this, Observer { listOfImages ->
-            binding.photosGrid.adapter =
-                GridAdapter(listOfImages, this)
+            if (NetworkUtils.isOnline(this)) {
+                binding.photosGrid.adapter = GridAdapter(listOfImages, this)
+            } else {
+                Toast.makeText(this, this.getString(R.string.network_offline), Toast.LENGTH_LONG).show()
+            }
         })
     }
+
 
     /**
      * Overriden method on click on an image

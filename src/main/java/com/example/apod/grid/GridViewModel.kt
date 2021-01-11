@@ -11,8 +11,9 @@ import com.example.apod.utility.DataUtils
  */
 class GridViewModel : ViewModel() {
 
+    private val fileName: String = "data.json"
     lateinit var imageData: String
-    var imageList : List<Image>? = emptyList()
+    var imageList : List<Image> = emptyList()
 
     private val _images = MutableLiveData<List<Image>>()
     val image: LiveData<List<Image>>
@@ -22,15 +23,15 @@ class GridViewModel : ViewModel() {
      * Called on instance of viewmodel
      */
     init {
-        getNASAImages()
+        getNASAImages(fileName)
     }
 
     /**
      * Loads the list of images from json object
      */
-    fun getNASAImages() {
-        imageData = DataUtils.readJson("data.json")
+    fun getNASAImages(fileName: String) {
+        imageData = DataUtils.readJson(fileName)
         imageList = DataUtils.fromJson(imageData)
-        _images.value = imageList?.reversed()
+        _images.value = imageList.reversed()
     }
 }
